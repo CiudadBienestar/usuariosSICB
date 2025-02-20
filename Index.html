@@ -199,10 +199,221 @@
         }
     </script>
     <style>
-        /* [El CSS se mantiene igual que en la versión anterior] */
+        :root {
+            --color-primario: #f0ba0a;
+            --color-secundario: #45a049;
+            --color-error: #ff4444;
+            --color-exito: #00C851;
+            --color-fondo: #f8e6aa;
+            --color-texto: #333;
+        }
+
+        body {
+            background-color: var(--color-fondo);
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: var(--color-texto);
+        }
+
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+        }
+
+        #loading {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(17, 173, 30, 0.932);
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            margin: 20px 0;
+            padding: 20px;
+        }
+
+        .logo {
+            width: 400px;
+            height: auto;
+            max-width: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .form-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            padding: 20px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .form-container img {
+            width: 150px;
+            height: auto;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="email"]:focus {
+            border-color: var(--color-primario);
+            outline: none;
+        }
+
+        button {
+            background-color: var(--color-primario);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: var(--color-secundario);
+            transform: translateY(-1px);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .mensaje {
+            padding: 15px;
+            margin: 10px auto;
+            max-width: 400px;
+            border-radius: 5px;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .mensaje.error {
+            background-color: var(--color-error);
+            color: white;
+        }
+
+        .mensaje.exito {
+            background-color: var(--color-exito);
+            color: white;
+        }
+
+        footer {
+            background-color: #f1f1f1;
+            padding: 15px;
+            margin-top: auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.8rem;
+        }
+
+        h1 {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: var(--color-texto);
+            margin: 20px 0;
+            font-size: 1.8rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                width: 300px;
+            }
+
+            .form-container {
+                flex-direction: column;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+                padding: 0 15px;
+            }
+
+            .form-container form {
+                padding: 0 15px;
+            }
+        }
     </style>
 </head>
+
 <body>
-    <!-- [El HTML se mantiene igual que en la versión anterior] -->
+    <header>
+        <img src="https://ciudadbienestar.github.io/usuariosSICB/Logos_Acciones_Colectivas.png" alt="Logo Ciudad Bienestar" class="logo">
+    </header>
+    
+    <h1>Consultar Credenciales de Acceso Sistema de Información - SICB</h1>
+    
+    <div id="mensaje" class="mensaje"></div>
+
+    <div class="form-container">
+        <img src="https://ciudadbienestar.github.io/usuariosSICB/SICB.png" alt="Imagen SICB">
+        <form onsubmit="enviarDatos(event)">
+            <label for="correo">Correo Electrónico Registrado:</label>
+            <input type="email" id="correo" name="correo" required 
+                   placeholder="Ingresa tu correo electrónico"
+                   autocomplete="email">
+            <button type="submit">Consultar Credenciales de Ingreso</button>
+        </form>
+    </div>
+    
+    <div id="overlay"></div>
+    <div id="loading">Procesando solicitud...</div>
+
+    <footer>
+        <p><strong>© 2025 SICB - Estrategia de Movilización Social Ciudad Bienestar</strong></p>
+    </footer>
 </body>
 </html>
