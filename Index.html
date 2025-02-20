@@ -10,7 +10,7 @@
         // Configuración inicial de EmailJS
         (function () {
             try {
-                emailjs.init("jW69WC72pyXkLXJ1i");
+                emailjs.init("QE7pcnMsnWNPp_i-q");
                 console.log('EmailJS inicializado correctamente');
             } catch (error) {
                 console.error('Error al inicializar EmailJS:', error);
@@ -124,11 +124,11 @@
                 to_name: usuarioData.Nombre || 'Usuario',
                 to_usuario: usuarioData.Usuario || 'No disponible',
                 to_password: usuarioData.Password || 'No disponible',
-                to_curso: usuarioData.Curso || 'No disponible',
+               
             };
 
             try {
-                await emailjs.send('service_s8nq09o', 'users_kfihheo', templateParams);
+                await emailjs.send('service_d1xyqlc', 'template_hb7r3lh', templateParams);
             } catch (error) {
                 console.error('Error al enviar correo:', error);
                 throw new Error('Error al enviar el correo electrónico');
