@@ -146,8 +146,7 @@
                         to_email: usuarioData.Correo,
                         to_name: usuarioData.Nombre || 'Usuario',
                         to_usuario: usuarioData.Usuario || 'No disponible',
-                        to_password: usuarioData.Password || 'No disponible',
-                        reply_to: usuarioData.Correo //
+                        to_password: usuarioData.Password || 'No disponible'            
                     };
 
                     await emailjs.send(_0x2f8d[1], _0x2f8d[2], templateParams);
