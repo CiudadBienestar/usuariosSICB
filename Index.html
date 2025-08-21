@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
-        // Configuración de EmailJS con ofuscación básica
+        // Configuración de EmailJS
         const _0x2f8d=['init','service_d1xyqlc','template_hb7r3lh','SuuTAf-VVQFnsM8ed'];
         (function(){
             try {
@@ -20,7 +20,7 @@
             }
         })();
 
-        // Almacenamiento seguro de intentos usando localStorage
+        // Almacenamiento localStorage
         class RateLimiter {
             constructor(maxAttempts, timeWindow) {
                 this.maxAttempts = maxAttempts;
@@ -62,15 +62,14 @@
 
         const rateLimiter = new RateLimiter(3, 300000); // 3 intentos cada 5 minutos
 
-        // Función principal mejorada
+  
         async function enviarDatos(event) {
             event.preventDefault();
             const form = event.target;
             const correo = form.correo.value.toLowerCase().trim();
             const submitButton = form.querySelector('button[type="submit"]');
 
-            try {
-                // Validaciones mejoradas
+            try {                
                 if (!validarCorreo(correo)) {
                     throw new Error('Por favor, ingrese un correo electrónico válido.');
                 }
@@ -102,13 +101,13 @@
             }
         }
 
-        // Validación de correo mejorada
+        // Validación de correo
         function validarCorreo(correo) {
             const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             return re.test(correo);
         }
 
-        // Búsqueda de usuario con cache
+        // Búsqueda de usuario
         async function buscarUsuario(correo) {
             const url = 'https://script.google.com/macros/s/AKfycbz6dyY1_-Tyojnoe5DrJKSFrQq56rC2ZbAakKYp9uDCkFuW05qzuZZHg-l-CPOBCnrcgw/exec';
             const cacheKey = 'userData';
@@ -136,7 +135,7 @@
             return data.find(entry => entry.Correo.toLowerCase() === correo.toLowerCase());
         }
 
-        // Envío de correo con retry
+        // Envío de correo
         async function enviarCorreo(usuarioData) {
             const maxRetries = 2;
             let retries = 0;
@@ -162,7 +161,6 @@
             }
         }
 
-        // Funciones UI mejoradas
         function mostrarCargando(mostrar) {
             const loadingElement = document.getElementById('loading');
             const overlay = document.getElementById('overlay');
@@ -224,7 +222,7 @@
     <!-- Mensaje de estado -->
     <div id="mensaje" class="hidden"></div>
 
-    <!-- Contenedor principal del formulario -->
+    <!-- Contenedor principal -->
     <div class="flex-1 flex items-center justify-center px-4 py-8">
         <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8 w-full max-w-2xl">
             <div class="flex flex-col lg:flex-row items-center gap-8">
@@ -262,7 +260,7 @@
         </div>
     </div>
     
-    <!-- Overlay y loading -->
+    <!-- carga -->
     <div id="overlay" class="hidden fixed inset-0 bg-black/50 z-40"></div>
     <div id="loading" class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-600 text-white px-6 py-4 rounded-lg shadow-xl z-50">
         <div class="flex items-center space-x-3">
