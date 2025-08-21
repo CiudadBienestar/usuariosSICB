@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Sistema de consulta de credenciales para Sistema de Información - SICB">
     <title>Usuarios SICB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
         // Configuración de EmailJS con ofuscación básica
@@ -181,7 +182,7 @@
         function mostrarMensaje(mensaje, tipo) {
             const mensajeElement = document.getElementById('mensaje');
             mensajeElement.textContent = mensaje;
-            mensajeElement.className = `mensaje ${tipo}`;
+            mensajeElement.className = `mensaje ${tipo} px-4 py-3 rounded-lg text-white font-medium transition-all duration-300 max-w-md mx-auto mb-6`;
             mensajeElement.style.display = 'block';
 
             const timeout = tipo === 'error' ? 5000 : 3000;
@@ -191,229 +192,91 @@
         }
 
         function mostrarError(mensaje) {
+            const mensajeElement = document.getElementById('mensaje');
+            mensajeElement.className = 'px-4 py-3 rounded-lg text-white font-medium transition-all duration-300 max-w-md mx-auto mb-6 bg-red-500';
             mostrarMensaje(mensaje, 'error');
         }
 
         function mostrarExito(mensaje) {
+            const mensajeElement = document.getElementById('mensaje');
+            mensajeElement.className = 'px-4 py-3 rounded-lg text-white font-medium transition-all duration-300 max-w-md mx-auto mb-6 bg-green-900';
             mostrarMensaje(mensaje, 'exito');
         }
     </script>
-    <style>
-        :root {
-            --color-primario: #f0ba0a;
-            --color-secundario: #45a049;
-            --color-error: #ff4444;
-            --color-exito: #00C851;
-            --color-fondo: #f8e6aa;
-            --color-texto: #333;
-        }
-
-        body {
-            background-color: var(--color-fondo);
-            text-align: center;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            color: var(--color-texto);
-        }
-
-        #overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 998;
-        }
-
-        #loading {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(17, 173, 30, 0.932);
-            color: white;
-            padding: 20px;
-            border-radius: 5px;
-            z-index: 999;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        header {
-            margin: 20px 0;
-            padding: 20px;
-        }
-
-        .logo {
-            width: 400px;
-            height: auto;
-            max-width: 100%;
-            transition: transform 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.02);
-        }
-
-        .form-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 20px 0;
-            padding: 20px;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .form-container img {
-            width: 150px;
-            height: auto;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            max-width: 400px;
-            width: 100%;
-        }
-
-        input[type="email"] {
-            width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            transition: border-color 0.3s ease;
-        }
-
-        input[type="email"]:focus {
-            border-color: var(--color-primario);
-            outline: none;
-        }
-
-        button {
-            background-color: var(--color-primario);
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.1s ease;
-            width: 100%;
-        }
-
-        button:hover {
-            background-color: var(--color-secundario);
-            transform: translateY(-1px);
-        }
-
-        button:active {
-            transform: translateY(1px);
-        }
-
-        button:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
-
-        .mensaje {
-            padding: 15px;
-            margin: 10px auto;
-            max-width: 400px;
-            border-radius: 5px;
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .mensaje.error {
-            background-color: var(--color-error);
-            color: white;
-        }
-
-        .mensaje.exito {
-            background-color: var(--color-exito);
-            color: white;
-        }
-
-        footer {
-            background-color: #f1f1f1;
-            padding: 15px;
-            margin-top: auto;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        footer p {
-            margin: 0;
-            font-size: 0.8rem;
-        }
-
-        h1 {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            color: var(--color-texto);
-            margin: 20px 0;
-            font-size: 1.8rem;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 768px) {
-            .logo {
-                width: 300px;
-            }
-
-            .form-container {
-                flex-direction: column;
-            }
-
-            h1 {
-                font-size: 1.5rem;
-                padding: 0 15px;
-            }
-
-            .form-container form {
-                padding: 0 15px;
-            }
-        }
-    </style>
 </head>
 
-<body>
-    <header>
-        <img src="https://ciudadbienestar.github.io/usuariosSICB/Logos_Acciones_Colectivas.png" alt="Logo Ciudad Bienestar" class="logo">
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 min-h-screen flex flex-col text-gray-800 font-sans">
+    
+    <!-- Header -->
+    <header class="text-center py-8 px-4">
+        <img src="https://ciudadbienestar.github.io/usuariosSICB/Logos_Acciones_Colectivas.png" 
+             alt="Logo Ciudad Bienestar" 
+             class="w-96 h-auto max-w-full mx-auto transition-transform duration-300 hover:scale-105">
     </header>
     
-    <h1>Consultar Credenciales de Acceso Sistema de Información - SICB</h1>
-    
-    <div id="mensaje" class="mensaje"></div>
-
-    <div class="form-container">
-        <img src="https://ciudadbienestar.github.io/usuariosSICB/SICB.png" alt="Imagen SICB">
-        <form onsubmit="enviarDatos(event)">
-            <label for="correo">Correo Electrónico Registrado:</label>
-            <input type="email" id="correo" name="correo" required 
-                   placeholder="Ingresa tu correo electrónico"
-                   autocomplete="email">
-            <button type="submit">Consultar Credenciales de Ingreso</button>
-        </form>
+    <!-- Título principal -->
+    <div class="text-center px-4 mb-8">
+        <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-blue-600 leading-tight">
+            Consultar Credenciales de Acceso Sistema de Información - SICB
+        </h1>
     </div>
     
-    <div id="overlay"></div>
-    <div id="loading">Procesando solicitud...</div>
+    <!-- Mensaje de estado -->
+    <div id="mensaje" class="hidden"></div>
 
-    <footer>
-        <p><strong>© 2025 SICB - Estrategia de Movilización Social Ciudad Bienestar</strong></p>
+    <!-- Contenedor principal del formulario -->
+    <div class="flex-1 flex items-center justify-center px-4 py-8">
+        <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8 w-full max-w-2xl">
+            <div class="flex flex-col lg:flex-row items-center gap-8">
+                
+                <!-- Imagen lateral -->
+                <div class="flex-shrink-0">
+                    <img src="https://ciudadbienestar.github.io/usuariosSICB/SICB.png" 
+                         alt="Imagen SICB" 
+                         class="w-32 h-auto">
+                </div>
+                
+                <!-- Formulario -->
+                <div class="flex-1 w-full">
+                    <form onsubmit="enviarDatos(event)" class="space-y-6">
+                        <div>
+                            <label for="correo" class="block text-sm font-medium text-gray-700 mb-2">
+                                Correo Electrónico Registrado:
+                            </label>
+                            <input type="email" 
+                                   id="correo" 
+                                   name="correo" 
+                                   required 
+                                   placeholder="Ingresa tu correo electrónico"
+                                   autocomplete="email"
+                                   class="w-full px-4 py-3 text-base border-2 border-gray-300 rounded-lg focus:border-blue-600 focus:outline-none transition-colors duration-300 disabled:bg-gray-100 disabled:opacity-70">
+                        </div>
+                        
+                        <button type="submit" 
+                                class="w-full bg-blue-600 hover:bg-green-900 text-white py-3 px-6 rounded-lg font-medium text-base transition-all duration-300 transform hover:scale-105 hover:shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none">
+                            Consultar Credenciales de Ingreso
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Overlay y loading -->
+    <div id="overlay" class="hidden fixed inset-0 bg-black/50 z-40"></div>
+    <div id="loading" class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-900 text-white px-6 py-4 rounded-lg shadow-xl z-50">
+        <div class="flex items-center space-x-3">
+            <div class="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
+            <span>Procesando solicitud...</span>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 py-4 px-4 mt-auto">
+        <p class="text-center text-sm text-gray-600 font-medium">
+            <strong>© 2025 SICB - Estrategia de Movilización Social Ciudad Bienestar</strong>
+        </p>
     </footer>
+
 </body>
 </html>
