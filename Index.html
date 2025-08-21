@@ -62,14 +62,15 @@
 
         const rateLimiter = new RateLimiter(3, 300000); // 3 intentos cada 5 minutos
 
-  
+        // Función envío de datos
         async function enviarDatos(event) {
             event.preventDefault();
             const form = event.target;
             const correo = form.correo.value.toLowerCase().trim();
             const submitButton = form.querySelector('button[type="submit"]');
 
-            try {                
+            try {
+                // Validaciones
                 if (!validarCorreo(correo)) {
                     throw new Error('Por favor, ingrese un correo electrónico válido.');
                 }
@@ -101,7 +102,7 @@
             }
         }
 
-        // Validación de correo
+        // Validar correo 
         function validarCorreo(correo) {
             const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             return re.test(correo);
@@ -161,6 +162,7 @@
             }
         }
 
+        // Funciones UI
         function mostrarCargando(mostrar) {
             const loadingElement = document.getElementById('loading');
             const overlay = document.getElementById('overlay');
@@ -177,28 +179,26 @@
             emailInput.disabled = deshabilitar;
         }
 
-        function mostrarMensaje(mensaje, tipo) {
+        function mostrarMensaje(mensaje, className) {
             const mensajeElement = document.getElementById('mensaje');
             mensajeElement.textContent = mensaje;
-            mensajeElement.className = `mensaje ${tipo} px-4 py-3 rounded-lg text-white font-medium transition-all duration-300 max-w-md mx-auto mb-6`;
+            mensajeElement.className = className;
             mensajeElement.style.display = 'block';
 
-            const timeout = tipo === 'error' ? 5000 : 3000;
+            const timeout = className.includes('bg-red') ? 5000 : 3000;
             setTimeout(() => {
                 mensajeElement.style.display = 'none';
             }, timeout);
         }
 
         function mostrarError(mensaje) {
-            const mensajeElement = document.getElementById('mensaje');
-            mensajeElement.className = 'px-4 py-3 rounded-lg text-white font-medium transition-all duration-300 max-w-md mx-auto mb-6 bg-red-500';
-            mostrarMensaje(mensaje, 'error');
+            const className = 'px-4 py-3 rounded-lg text-white font-bold transition-all duration-300 max-w-md mx-auto mb-6 bg-red-500 border-2 border-red-600';
+            mostrarMensaje(mensaje, className);
         }
 
         function mostrarExito(mensaje) {
-            const mensajeElement = document.getElementById('mensaje');
-            mensajeElement.className = 'px-4 py-3 rounded-lg text-green-800 font-bold transition-all duration-300 max-w-md mx-auto mb-6 bg-green-100 border-2 border-green-600';
-            mostrarMensaje(mensaje, 'exito');
+            const className = 'px-4 py-3 rounded-lg text-green-800 font-bold transition-all duration-300 max-w-md mx-auto mb-6 bg-green-100 border-2 border-green-600';
+            mostrarMensaje(mensaje, className);
         }
     </script>
 </head>
@@ -214,7 +214,7 @@
     
     <!-- Título principal -->
     <div class="text-center px-4 mb-8">
-        <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-green-600 leading-tight">
+        <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-blue-600 leading-tight">
             Consultar Credenciales de Acceso Sistema de Información - SICB
         </h1>
     </div>
@@ -222,7 +222,7 @@
     <!-- Mensaje de estado -->
     <div id="mensaje" class="hidden"></div>
 
-    <!-- Contenedor principal -->
+    <!-- Contenedor principal del formulario -->
     <div class="flex-1 flex items-center justify-center px-4 py-8">
         <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8 w-full max-w-2xl">
             <div class="flex flex-col lg:flex-row items-center gap-8">
@@ -260,7 +260,7 @@
         </div>
     </div>
     
-    <!-- carga -->
+    <!-- Overlay y loading -->
     <div id="overlay" class="hidden fixed inset-0 bg-black/50 z-40"></div>
     <div id="loading" class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-600 text-white px-6 py-4 rounded-lg shadow-xl z-50">
         <div class="flex items-center space-x-3">
