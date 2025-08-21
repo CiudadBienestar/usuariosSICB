@@ -199,7 +199,7 @@
 
         function mostrarExito(mensaje) {
             const mensajeElement = document.getElementById('mensaje');
-            mensajeElement.className = 'px-4 py-3 rounded-lg text-white font-medium transition-all duration-300 max-w-md mx-auto mb-6 bg-green-900';
+            mensajeElement.className = 'px-4 py-3 rounded-lg text-white font-medium transition-all duration-300 max-w-md mx-auto mb-6 bg-green-600';
             mostrarMensaje(mensaje, 'exito');
         }
     </script>
@@ -216,7 +216,7 @@
     
     <!-- Título principal -->
     <div class="text-center px-4 mb-8">
-        <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-green-600 leading-tight">
+        <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-blue-600 leading-tight">
             Consultar Credenciales de Acceso Sistema de Información - SICB
         </h1>
     </div>
@@ -253,7 +253,7 @@
                         </div>
                         
                         <button type="submit" 
-                                class="w-full bg-blue-600 hover:bg-green-900 text-white py-3 px-6 rounded-lg font-medium text-base transition-all duration-300 transform hover:scale-105 hover:shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none">
+                                class="w-full bg-blue-600 hover:bg-green-600 text-white py-3 px-6 rounded-lg font-medium text-base transition-all duration-300 transform hover:scale-105 hover:shadow-lg disabled:bg-gray-400 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none">
                             Consultar Credenciales de Ingreso
                         </button>
                     </form>
@@ -264,7 +264,7 @@
     
     <!-- Overlay y loading -->
     <div id="overlay" class="hidden fixed inset-0 bg-black/50 z-40"></div>
-    <div id="loading" class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-900 text-white px-6 py-4 rounded-lg shadow-xl z-50">
+    <div id="loading" class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-600 text-white px-6 py-4 rounded-lg shadow-xl z-50">
         <div class="flex items-center space-x-3">
             <div class="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
             <span>Procesando solicitud...</span>
